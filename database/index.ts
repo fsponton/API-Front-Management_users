@@ -1,7 +1,8 @@
 import { server } from "./src/server"
+import { getEnviroments } from "./src/config/enviroments"
 
-const PORT = 3006
+const enviroments = getEnviroments()
 
-server.listen(PORT, () => {
-    console.log(`Database listening on ${PORT}`)
+server.listen(enviroments.PORT, () => {
+    console.log(`Database listening on ${enviroments.PORT}`)
 })
