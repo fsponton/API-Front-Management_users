@@ -16,3 +16,7 @@ export interface User {
 }
 
 export type NewUser = Pick<User, 'name', 'email', 'password'>
+
+export type LoginUser = Pick<Use, 'email', 'password'>
+
+export type UserLogged = Pick<User, 'id', 'name', 'email', 'role'>

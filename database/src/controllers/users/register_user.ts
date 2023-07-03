@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import toNewUserEntry from "../utils/users";
-import findAndSave from "../config/DDBB/repository/users/findAndSave";
+import { toNewUserEntry } from "../../utils/users";
+import findAndSave from "../../config/DDBB/repository/users/findAndSave";
 
 export default async (req: Request, res: Response) => {
     try {

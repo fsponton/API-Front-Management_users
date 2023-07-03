@@ -1,4 +1,4 @@
-import { NewUser } from "../types/types";
+import { NewUser, LoginUser } from "../types/types";
 
 
 const parseToString = (valueFromRequest: any): string => {
@@ -13,7 +13,7 @@ const isString = (string: string): boolean => {
 }
 
 
-const toNewUserEntry = (object: any): NewUser => {
+export const toNewUserEntry = (object: any): NewUser => {
     const newEntry: NewUser = {
         name: parseToString(object.name),
         email: parseToString(object.email),
@@ -22,4 +22,12 @@ const toNewUserEntry = (object: any): NewUser => {
     return newEntry
 }
 
-export default toNewUserEntry;
+export const toLoginUser = (object: any): LoginUser => {
+    const login: LoginUser = {
+        email: parseToString(object.email).toLocaleLowerCase(),
+        password: parseToString(object.password)
+    }
+    return login
+}
+
+// export default toNewUserEntry; toLoginUser;

@@ -1,32 +1,34 @@
 
-// import jwt from "jsonwebtoken"
-// import bcrypt from "bcryptjs"
-// import { PrismaClient } from "@prisma/client"
-// import { getEnviroments } from '../../../enviroments'
+import jwt from "jsonwebtoken"
+import bcrypt from "bcryptjs"
+import { PrismaClient } from "@prisma/client"
+import { getEnviroments } from '../../../enviroments'
+import { LoginUser, UserLogged } from "../../../../types/types"
 
-// const enviroments = getEnviroments()
+const enviroments = getEnviroments()
 
-// const prisma = new PrismaClient()
+const prisma = new PrismaClient()
 
-// export default async (formFromRequest: NewUser): User => {
-//     const emailLower = formFromRequest.email.toLowerCase()
-//     const user = await prisma.user.findUnique({ where: { email: emailLower } })
+export default async (formFromRequest: LoginUser): Promise<UserLogged> => {
 
-//     const encryptedPassword = user === null ? false
-//         : await bcrypt.compare(formFromRequest.password, user.password)
+    const user = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
 
-//     if (!(user && encryptedPassword)) throw new Error('')
-//     return res.status(401).send({ status: "error", msg: 'Usuario o password incorrecto' });
+    const encryptedPassword = user === null ? false
+        : await bcrypt.compare(formFromRequest.password, user.password)
 
-//     const userForToken = {
-//         id: user.id,
-//         name: user.name,
-//         email: user.email,
-//         role: user.role
-//     }
-//     const token = jwt.sign(userForToken, `${enviroments.SECRET_WORD}`, { expiresIn: 60 * 60 })
+    if (!(user && encryptedPassword)) throw new Error('Invalid Email or Password')
 
-//     return ({ ...userForToken, token })
-//     // return ({ token })
-// }
+
+    const userForToken = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+    }
+    const token = jwt.sign(userForToken, `${enviroments.SECRET_WORD}`, { expiresIn: 60 * 60 })
+
+
+    return ({ ...userForToken, token })
+
+}
 

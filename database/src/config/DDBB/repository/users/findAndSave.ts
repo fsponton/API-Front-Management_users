@@ -6,7 +6,6 @@ import { NewUser, User } from "../../../../types/types"
 const prisma = new PrismaClient()
 
 export default async (formFromRequest: NewUser): Promise<User> => {
-
     const emailLower = formFromRequest.email.toLowerCase()
     const result = await prisma.user.findUnique({ where: { email: emailLower } })
 
@@ -23,8 +22,6 @@ export default async (formFromRequest: NewUser): Promise<User> => {
             password: hash
         }
     })
-
-
     return user;
 }
 
