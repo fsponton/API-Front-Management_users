@@ -6,8 +6,7 @@ import { NewUser, User } from "../../../../types/types"
 const prisma = new PrismaClient()
 
 export default async (formFromRequest: NewUser): Promise<User> => {
-    const emailLower = formFromRequest.email.toLowerCase()
-    const result = await prisma.user.findUnique({ where: { email: emailLower } })
+    const result = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
 
     if (result) throw new Error(`El email: ${formFromRequest.email} ya se encuentra utilizado, seleccione otro`) //{ status: "error", msg: `User ${email} already exist's` }
 
@@ -22,6 +21,7 @@ export default async (formFromRequest: NewUser): Promise<User> => {
             password: hash
         }
     })
-    return user;
+
+    return user as User;
 }
 

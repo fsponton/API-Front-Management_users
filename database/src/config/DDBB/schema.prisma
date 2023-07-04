@@ -11,8 +11,13 @@ model User {
     id         String  @id @unique @default(uuid())
     name       String
     email      String  @unique
-    role       String  @default("user")
+    role       Role    @default(user)
     password   String
     active     Boolean @default(true)
     resetToken String?
+}
+
+enum Role {
+    user
+    admin
 }

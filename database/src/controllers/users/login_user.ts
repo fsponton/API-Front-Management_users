@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { toLoginUser } from "../../utils/users";
-
+import { toLoginUser } from "../../middlewares/users/index";
 import findAndAuthenticated from "../../config/DDBB/repository/users/findAndAuthenticated";
 
 export default async (req: Request, res: Response) => {
