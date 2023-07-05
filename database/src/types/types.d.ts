@@ -24,3 +24,6 @@ export type LoginUser = Pick<Use, 'email', 'password'>
 export type UserLogged = Pick<User, 'id', 'name', 'email', 'role'>
 
 export type UpdateUser = Omit<User, 'id', 'resetToken', 'active'>
+
+export type DeleteOrDisableUser = pick<User, 'email'>
+

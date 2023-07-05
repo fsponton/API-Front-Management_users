@@ -6,7 +6,6 @@ export const server = express()
 server.use(express.json())
 
 
-
 //routes
 server.use('/', routerUsers)
 
