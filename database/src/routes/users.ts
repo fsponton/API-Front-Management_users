@@ -1,18 +1,19 @@
 import { Router } from 'express'
-import { getUsers, registerUser, loginUser, updateUser, deleteUser, disableUser } from '../controllers/users/index'
+import { getUsers, registerUser, loginUser, updateUser, deleteUser, disableUser, forgotPassword } from '../controllers/users/index'
 const routerUsers = Router()
 
 
-
-routerUsers.post("/newUser", registerUser)
+routerUsers.post("/new_user", registerUser)
 
 routerUsers.post("/login", loginUser)
 
-routerUsers.post("/updateUser", updateUser)
+routerUsers.post("/update_user", updateUser)
 
-routerUsers.post("/deleteUser", deleteUser)
+routerUsers.post("/delete_user", deleteUser)
 
-routerUsers.post("/disableUser", disableUser)
+routerUsers.post("/disable_user", disableUser)
+
+routerUsers.post("/forgot_password", forgotPassword)
 
 routerUsers.get("/", getUsers)
 

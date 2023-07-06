@@ -5,7 +5,7 @@ const isString = (string: string): boolean => {
 }
 export const parseToString = (valueFromRequest: any): string => {
     if (!isString(valueFromRequest)) {
-        throw new Error('incorrect or missing comment')
+        throw new Error(`incorrect ${valueFromRequest} or missing value `)
     }
     return valueFromRequest
 }
@@ -13,8 +13,6 @@ export const parseToString = (valueFromRequest: any): string => {
 const isRole = (param: any): boolean => {
     return (param === 'admin' || param === 'user')
 }
-
-
 
 export const parseRole = (roleFromRequest: any): Role => {
     if (!isString(roleFromRequest) || !isRole(roleFromRequest)) {

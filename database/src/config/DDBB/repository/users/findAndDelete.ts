@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import { User, DeleteOrDisableUser } from "../../../../types/types";
+import { User, EmailUser } from "../../../../types/types";
 
 
 const prisma = new PrismaClient()
 
-export default async (formFromRequest: DeleteOrDisableUser): Promise<User> => {
+export default async (formFromRequest: EmailUser): Promise<User> => {
     const user = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
 
     if (!user) throw new Error(`El usuario: ${formFromRequest.email} no existe`)
