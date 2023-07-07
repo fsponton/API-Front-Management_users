@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { getUsers, registerUser, loginUser, updateUser, deleteUser, disableUser, forgotPassword } from '../controllers/users/index'
-const routerUsers = Router()
 
+const routerUsers = Router()
 
 routerUsers.post("/new_user", registerUser)
 
