@@ -4,13 +4,10 @@ import findAndDisable from "../../config/DDBB/repository/users/findAndDisable";
 
 
 const disableUser = async (req: Request, res: Response) => {
-    try {
-        const userDisableEntry = toCheckEmail(req.body) //middleaware
-        const user = await findAndDisable(userDisableEntry)
-        return res.status(200).json({ status: "success", msg: `El usuario ${user.email} fue deshabilitado, status del usuario: ${user.active}` })
-    } catch (err: any) {
-        return res.status(404).json({ status: "error", msg: err.message })
-    }
+    const userDisableEntry = toCheckEmail(req.body) //middleaware
+    const user = await findAndDisable(userDisableEntry)
+    return res.status(200).json({ status: "success", msg: `El usuario ${user.email} fue deshabilitado, status del usuario: ${user.active}` })
+
 }
 
 export default disableUser;
