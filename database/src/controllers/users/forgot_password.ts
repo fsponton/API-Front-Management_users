@@ -5,7 +5,7 @@ import { mailOptions } from "../../config/mailer"
 import findAndCreateMailOption from "../../config/DDBB/repository/users/findAndCreateMailOption";
 
 
-export default async (req: Request, res: Response) => {
+const forgotPassword = async (req: Request, res: Response) => {
     try {
         const userEmailEntry = toCheckEmail(req.body) //middleware
         const mailOption = await findAndCreateMailOption(userEmailEntry)
@@ -19,3 +19,5 @@ export default async (req: Request, res: Response) => {
 
     }
 }
+
+export default forgotPassword;

@@ -1,7 +1,18 @@
-export { default as getUsers } from "./get_users"
-export { default as registerUser } from "./register_user"
-export { default as loginUser } from "./login_user"
-export { default as updateUser } from "./update_user"
-export { default as deleteUser } from "./delete_user"
-export { default as disableUser } from "./disable_user"
-export { default as forgotPassword } from "./forgot_password"
+import catchedAsync from "../../utils/catchedAsync"
+
+import registerUserModule from "./register_user"
+import getUserModule from "./get_users"
+import loginUserModule from "./login_user"
+import updateUserModule from "./update_user"
+import deleteUserModule from "./delete_user"
+import disableUserModule from "./disable_user"
+import forgotPasswordModule from "./forgot_password"
+
+
+export const registerUser = catchedAsync(registerUserModule)
+export const getUsers = catchedAsync(getUserModule)
+export const loginUser = catchedAsync(loginUserModule)
+export const updateUser = catchedAsync(updateUserModule)
+export const deleteUser = catchedAsync(deleteUserModule)
+export const disableUser = catchedAsync(disableUserModule)
+export const forgotPassword = catchedAsync(forgotPasswordModule) 

@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { toCheckEmail } from "../../middlewares/users";
 import findAndDisable from "../../config/DDBB/repository/users/findAndDisable";
 
-export default async (req: Request, res: Response) => {
+
+const disableUser = async (req: Request, res: Response) => {
     try {
         const userDisableEntry = toCheckEmail(req.body) //middleaware
         const user = await findAndDisable(userDisableEntry)
@@ -12,3 +13,4 @@ export default async (req: Request, res: Response) => {
     }
 }
 
+export default disableUser;

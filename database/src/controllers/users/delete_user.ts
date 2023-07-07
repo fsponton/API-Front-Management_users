@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { toCheckEmail } from "../../middlewares/users";
 import findAndDelete from "../../config/DDBB/repository/users/findAndDelete";
 
-export default async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
     try {
         const userDeleteEntry = toCheckEmail(req.body) //middleaware
         const user = await findAndDelete(userDeleteEntry)
@@ -12,3 +12,4 @@ export default async (req: Request, res: Response) => {
     }
 }
 
+export default deleteUser;
