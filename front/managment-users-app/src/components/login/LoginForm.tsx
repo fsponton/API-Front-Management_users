@@ -41,10 +41,10 @@ const LoginForm = () => {
                     <Field id="password" name="password" type="password" />
                     <ErrorMessage name="password" component="div" />
                     <p className="register-user text-left  ">
-                        <a href="/registerUser"> Register user</a>
+                        <a href="/new_user"> Register user</a>
                     </p>
                     <p className="forgot-password text-right  ">
-                        <a href="/forgotPassword">Forgot password?</a>
+                        <a href="/forgot_password">Forgot password?</a>
                     </p>
                     <button type="submit">Submit</button>
                 </Form>
