@@ -20,5 +20,5 @@ routerUsers.put("/reset_password", verifyToken, resetPassword)
 
 routerUsers.get("/", getUsers)
 
-
+console.log("entro333")
 export default routerUsers;

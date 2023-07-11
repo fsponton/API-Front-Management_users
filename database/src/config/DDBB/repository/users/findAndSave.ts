@@ -1,14 +1,17 @@
 import bcrypt from "bcryptjs"
 import { PrismaClient } from "@prisma/client"
 import { NewUser, User } from "../../../../types/types"
+import { UserError } from "../../../../utils/Errors"
 
 
 const prisma = new PrismaClient()
 
-export default async (formFromRequest: NewUser): Promise<User> => {
+const findAndSave = async (formFromRequest: NewUser): Promise<User> => {
+
+
     const result = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
 
-    if (result) throw new Error(`Email: ${formFromRequest.email} already exist's`)
+    if (result) throw new UserError(`Email: ${formFromRequest.email} already exist's`, 404)
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(formFromRequest.password, salt)
@@ -23,5 +26,8 @@ export default async (formFromRequest: NewUser): Promise<User> => {
     })
 
     return user as User;
+
+
 }
 
+export default findAndSave;

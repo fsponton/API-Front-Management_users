@@ -14,16 +14,11 @@ export interface User {
 }
 
 
-// export type NewUser = Pick<User, 'name', 'email', 'password'>
-
 export type LoginUser = Pick<Use, 'email', 'password'>
-
-// export type UserLogged = Pick<User, 'id', 'name', 'email', 'role'>
-
-// export type UpdateUser = Omit<User, 'id', 'resetToken', 'active'>
 
 export type EmailUser = pick<User, 'email'>
 
+export type NewUser = pick<User, 'name', 'email', 'password'>
 
 export interface ResetPW {
     password: string

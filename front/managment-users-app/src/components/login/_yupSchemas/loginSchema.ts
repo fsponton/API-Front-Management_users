@@ -2,9 +2,7 @@
 import * as Yup from 'yup';
 
 export default Yup.object().shape({
-    email: Yup.string()
-        .email()
-        .required('Required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string()
         .required('Required'),
 });

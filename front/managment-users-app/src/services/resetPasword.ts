@@ -10,10 +10,8 @@ export default async function resetPassword(form: ResetPW) {
             data: { password },
             headers: { Authorization: `Bearer ${token}` }
         })
-        console.log(response.data)
         return response.data
     } catch (err: any) {
-        console.log(err.response.data)
         return err.response.data
     }
 }

@@ -14,7 +14,7 @@ const LoginForm = () => {
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100" style={{ backgroundColor: 'black' }}>
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div className="card bg-dark text-white" style={{ border: "border-radius: 1rem;" }}>
+                        <div className="card bg-dark text-white" style={{ border: "border-radius: 2rem" }}>
                             <Formik
                                 initialValues={{
                                     email: '',
@@ -42,8 +42,7 @@ const LoginForm = () => {
                                 <Form className='card-body p-5 text-center'>
 
                                     <div className='mb-md-5 mt-md-4 pb-5'>
-                                        <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                                        <p className="text-white-50 mb-5">Please enter your Email and Password!</p>
+                                        <h3 className=" mb-5 text-uppercase">Login</h3>
 
                                         <div className="form-outline form-white mb-4">
                                             <label htmlFor="email" className="form-label">Email:</label>
@@ -80,56 +79,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-// const LoginForm = () => {
-//     const navigate = useNavigate()
-//     return (
-//         <div>
-//             <Formik
-//                 initialValues={{
-//                     email: '',
-//                 }}
-//                 validationSchema={loginSchema}
-//                 onSubmit={async values => {
-//                     const result = await loginUser(values)
-//                     if (result.status === "success") {
-//                         Swal.fire({
-//                             icon: 'success',
-//                             title: `Hi ${result.msg}`
-//                         })
-//                         sessionStorage.setItem(`token`, JSON.stringify(result.user.token))
-//                         navigate("/dashboard")
-//                         return
-//                     }
-//                     Swal.fire({
-//                         icon: 'error',
-//                         title: `Email or password not found`,
-//                         text: `Check info`,
-//                     })
-//                 }
-//                 }
-//             >
-//                 <Form>
-//                     <label htmlFor='email'>Email:</label>
-//                     <Field id="email" name="email" />
-//                     <ErrorMessage name="email" component="div" />
-
-//                     <label htmlFor='password'>Password:</label>
-//                     <Field id="password" name="password" type="password" />
-//                     <ErrorMessage name="password" component="div" />
-//                     <p className="register-user text-left  ">
-//                         <a href="/new_user"> Register user</a>
-//                     </p>
-//                     <p className="forgot-password text-right  ">
-//                         <a href="/forgot_password">Forgot password?</a>
-//                     </p>
-//                     <button type="submit">Submit</button>
-//                 </Form>
-
-//             </Formik >
-
-
-//         </div>
-//     );
-// };
-
-// export default LoginForm;
