@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 export default async (formFromRequest: EmailUser): Promise<User> => {
     const user = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
 
-    if (!user) throw new Error(`El usuario: ${formFromRequest.email} no existe`)
+    if (!user) throw new Error(`The user: ${formFromRequest.email} does not exist`)
 
     await prisma.user.delete({
         where: {

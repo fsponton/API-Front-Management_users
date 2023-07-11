@@ -10,7 +10,7 @@ const forgotPassword = async (req: Request, res: Response) => {
     const userEmailEntry = toCheckEmail(req.body) //middleware
     const mailOption = await findAndCreateMailOption(userEmailEntry)
 
-    transporter.sendMail(mailOptions(mailOption.email, mailOption.verificationLink), (err) => {
+    transporter.sendMail(mailOptions(mailOption.email, mailOption.slug), (err) => {
         if (err) { return process.exit(1); }
     })
     return res.status(200).send({ status: "success", msg: `Se envio un enlace al email: ${mailOption.email}` })

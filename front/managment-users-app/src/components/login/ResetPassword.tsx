@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom"
 import { ResetPW } from '../../types/types';
 
 const ResetPasswordd: React.FC = () => {
-    const { token } = useParams()
+    const { slug1, slug2, slug3 } = useParams()
     const navigate = useNavigate()
-    console.log(token)
+    const token = `${slug1}` + "." + `${slug2}` + "." + `${slug3}`
     return (
         <div >
             <Formik
@@ -21,7 +21,7 @@ const ResetPasswordd: React.FC = () => {
                 onSubmit={async values => {
                     const form: ResetPW = {
                         password: values.password,
-                        token: token || ''
+                        token: token
                     }
                     const result = await resetPassword(form)
                     if (result.status === "success") {
@@ -31,6 +31,7 @@ const ResetPasswordd: React.FC = () => {
                             text: `${result.msg}`,
                         })
                         navigate("/")
+                        return
                     }
                     Swal.fire({
                         icon: 'error',

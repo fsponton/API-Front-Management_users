@@ -1,3 +1,9 @@
+import { Request } from "express"
+
+export interface CustomRequest extends Request {
+    userId: string;
+    password: string;
+}
 export interface Enviroments {
     PORT: number
     DATABASE_URL: string
@@ -6,15 +12,12 @@ export interface Enviroments {
     PASSWORD_NODEMAILER: string
 }
 
-
 export interface MailOptions {
     from: string
     to: string
     subject: string
-    text: string
+    html: string
 }
-
-
 
 
 export type Role = 'admin' | 'user'
@@ -39,4 +42,9 @@ export type UserLogged = Pick<User, 'id', 'name', 'email', 'role'>
 export type UpdateUser = Omit<User, 'id', 'resetToken', 'active'>
 
 export type EmailUser = pick<User, 'email'>
+
+export type ResetPassword = pick<User, 'id', 'password'>
+
+
+
 

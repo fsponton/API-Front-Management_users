@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export default async (formFromRequest: NewUser): Promise<User> => {
     const result = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
 
-    if (result) throw new Error(`El email: ${formFromRequest.email} ya se encuentra utilizado, seleccione otro`) //{ status: "error", msg: `User ${email} already exist's` }
+    if (result) throw new Error(`Email: ${formFromRequest.email} already exist's`)
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(formFromRequest.password, salt)

@@ -7,11 +7,13 @@ export default async function resetPassword(form: ResetPW) {
         const response = await axios({
             method: 'put',
             url: 'http://localhost:3005/reset_password',
-            data: password,
+            data: { password },
             headers: { Authorization: `Bearer ${token}` }
         })
+        console.log(response.data)
         return response.data
     } catch (err: any) {
+        console.log(err.response.data)
         return err.response.data
     }
 }
