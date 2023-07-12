@@ -1,10 +1,10 @@
-// import { Response } from "express";
 import bcrypt from "bcryptjs"
 import findAndResetPassword from "../../config/DDBB/repository/users/findAndResetPassword";
 import { CustomRequest } from "../../types/types";
 
 const resetPassword = async (req: CustomRequest, res: any) => {
-    const { userId, password } = req
+    const { userId } = req
+    const { password } = req.body
 
     if (!password) { return res.status(404).send({ status: "error", msg: "Password needed" }) }
     const salt = bcrypt.genSaltSync(10);

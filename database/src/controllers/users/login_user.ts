@@ -1,14 +1,22 @@
-import { Request, Response } from "express";
-import { toLoginUser } from "../../middlewares/users/index";
-import findAndAuthenticated from "../../config/DDBB/repository/users/findAndAuthenticated";
+import { Response } from "express";
+import { getEnviroments } from "../../config/enviroments";
+import jwt from "jsonwebtoken"
 
-const loginUser = async (req: Request, res: Response) => {
-    console.log("entro")
-    const newLogin = toLoginUser(req.body) //middleaware
-    const login = await findAndAuthenticated(newLogin)
+const loginUser = async (req: any, res: Response) => {
+    const { user } = req
+
+    const userForToken = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+    }
+
+    const token = jwt.sign(userForToken, `${getEnviroments().SECRET_WORD}`, { expiresIn: 60 * 60 })
+
     return res.status(200)
-        .header({ token: login.token })
-        .json({ status: "success", msg: ` ${login.email} you are logged`, user: login })
+        .header({ token: token })
+        .json({ status: "success", msg: ` ${userForToken.email} you are logged`, user: userForToken })
 }
 
 export default loginUser;

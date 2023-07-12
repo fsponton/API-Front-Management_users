@@ -1,6 +1,4 @@
 import catchedAsync from "../../utils/catchedAsync"
-import catchedAsyncCustomRequest from "../../utils/catchedAsyncCustomRequest"
-
 
 import registerUserModule from "./register_user"
 import getUserModule from "./get_users"
@@ -18,4 +16,4 @@ export const updateUser = catchedAsync(updateUserModule)
 export const deleteUser = catchedAsync(deleteUserModule)
 export const disableUser = catchedAsync(disableUserModule)
 export const forgotPassword = catchedAsync(forgotPasswordModule)
-export const resetPassword = catchedAsyncCustomRequest(resetPasswordModule)
+export const resetPassword = catchedAsync(resetPasswordModule)

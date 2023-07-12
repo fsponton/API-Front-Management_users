@@ -1,7 +1,7 @@
-import { parseToString } from "../../utils/users";
+import { parseToString } from "../users";
 import { LoginUser } from "../../types/types";
 
-const toLoginUser = (object: any): LoginUser => {
+const toLoginUserr = (object: any): LoginUser => {
     const login: LoginUser = {
         email: parseToString(object.email).toLocaleLowerCase(),
         password: parseToString(object.password)
@@ -9,4 +9,4 @@ const toLoginUser = (object: any): LoginUser => {
     return login
 }
 
-export default toLoginUser;
+export default toLoginUserr;

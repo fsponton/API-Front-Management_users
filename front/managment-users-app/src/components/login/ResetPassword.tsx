@@ -1,10 +1,10 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Swal from "sweetalert2";
 import { useParams } from 'react-router-dom';
 import passwordSchema from './_yupSchemas/passwordSchema';
 import resetPassword from '../../services/resetPasword';
+import Swal from "sweetalert2";
 import { ResetPW } from '../../types/types';
 
 const ResetPasswordd: React.FC = () => {
@@ -27,6 +27,7 @@ const ResetPasswordd: React.FC = () => {
                                         password: values.password,
                                         token: token
                                     }
+                                    console.log(form)
                                     const result = await resetPassword(form)
                                     if (result.status === "success") {
                                         Swal.fire({
@@ -54,14 +55,13 @@ const ResetPasswordd: React.FC = () => {
                                     </div>
                                     <button className="btn btn-outline-light btn-lg px-5" type="submit">Submit</button>
                                 </Form>
-
                             </Formik >
                         </div>
                     </div>
                 </div>
             </div>
         </section >
-    )
+    );
 }
 
 export default ResetPasswordd;

@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { toCheckEmail } from "../../middlewares/users";
 import { transporter } from "../../config/transporter"
 import { mailOptions } from "../../config/mailer"
 import findAndCreateMailOption from "../../config/DDBB/repository/users/findAndCreateMailOption";
+import { toCheckEmaill } from "../../utils/FormVerification";
 
 
 const forgotPassword = async (req: Request, res: Response) => {
 
-    const userEmailEntry = toCheckEmail(req.body) //middleware
+    const userEmailEntry = toCheckEmaill(req.body) //middleware
     const mailOption = await findAndCreateMailOption(userEmailEntry)
 
     transporter.sendMail(mailOptions(mailOption.email, mailOption.slug), (err) => {

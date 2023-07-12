@@ -1,27 +1,25 @@
 import jwt, { JwtPayload, DecodeOptions } from "jsonwebtoken";
 import { Response, NextFunction } from "express"
 import { getEnviroments } from "../../config/enviroments"
+import { TokenError } from "../../utils/Errors";
 
 //middleware de extraction de token
-const verifyToken = (req: any, res: Response, next: NextFunction) => {
+const verifyToken = (req: any, _res: Response, next: NextFunction) => {
     const authorization = req.get('authorization');
     let token = ''
 
     if (authorization && authorization.toLowerCase().startsWith('bearer')) {
         token = authorization.substring(7)
-    } else { return res.status(401).send({ error: "Invalid authorization" }) }
+    } else { throw new TokenError('Invalid authorization', 401) }
 
     const decodedToken = jwt.decode(token, { complete: true, key: getEnviroments().SECRET_WORD } as DecodeOptions) as JwtPayload;
 
-    if (!token || !decodedToken.payload.exp) {
-        return res.status(401).json({ error: 'Token missing or invalid' })
-    }
+    if (!token || !decodedToken.payload.exp) { throw new TokenError('Token missing or invalid', 401) }
 
-    req.password = req.body.password
     req.userId = decodedToken.payload.id
 
-    next()
-    return
+    return next()
+
 }
 
 export default verifyToken;

@@ -1,5 +1,10 @@
-export { default as toNewUserEntry } from "./toNewUserEntry"
-export { default as toLoginUser } from "./toLoginUser"
-export { default as toUpdateUser } from "./toUpdateUser"
-export { default as toCheckEmail } from "./toCheckEmail"
+import catchedAsync from "../../utils/catchedAsync"
+import verifyExistenceModule from "./verifyExistence"
+import verifyLoginModule from "./verifyLogin"
+import findUserModule from "./findUser"
+
+export const verifyExistence = catchedAsync(verifyExistenceModule)
+export const verifyLogin = catchedAsync(verifyLoginModule)
+export const findUser = catchedAsync(findUserModule)
+
 export { default as verifyToken } from "./verifyToken"

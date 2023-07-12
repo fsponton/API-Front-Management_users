@@ -6,3 +6,12 @@ export class UserError extends Error {
         this.code = code;
     }
 }
+
+export class TokenError extends Error {
+    code: number;
+    constructor(message: string, code: number = 401) {
+        super(message);
+        this.name = 'tokenError'
+        this.code = code;
+    }
+}

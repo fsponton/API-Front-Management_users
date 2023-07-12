@@ -8,8 +8,6 @@ import registerUser from "../../services/registerUser";
 
 const RegisterUser: React.FC = () => {
     const navigate = useNavigate();
-
-
     return (
         <section className="vh-100 gradient-custom">
             <div className="container py-5 h-100">
@@ -30,19 +28,19 @@ const RegisterUser: React.FC = () => {
                                         password: values.password
                                     }
                                     const result = await registerUser(form)
-                                    if (result.status === "succes") {
+                                    if (result.status === "success") {
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'User registered successfully',
                                             text: 'el usuario nombreee fue registrado'
                                         });
-                                        navigate('/login');
+                                        navigate('/');
                                         return
                                     }
                                     Swal.fire({
                                         icon: 'error',
                                         title: `User Cant be Register`,
-                                        // text: `${}`
+                                        text: `${result.message}`
                                     })
 
                                 }}

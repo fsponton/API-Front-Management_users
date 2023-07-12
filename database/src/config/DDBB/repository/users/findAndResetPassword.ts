@@ -25,8 +25,6 @@ export default async ({ id, passwordHash }: { id: string; passwordHash: string }
                     resetToken: null,
                 },
             });
-
-            console.log(user)
             return user;
         }
     }

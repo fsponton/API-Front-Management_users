@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { toNewUserEntry } from "../../middlewares/users/index";
-import findAndSave from "../../config/DDBB/repository/users/findAndSave";
+import { toNewUserEntryy } from "../../utils/FormVerification";
+import saveRegistration from "../../config/DDBB/repository/users/saveRegistration";
 
 
 
 const registerUser = async (req: Request, res: Response) => {
-    const newUserEntry = toNewUserEntry(req.body) //middleaware
-    const result = await findAndSave(newUserEntry)
+    const newUserEntry = toNewUserEntryy(req.body) //
+    const result = await saveRegistration(newUserEntry)
     return res.status(200).json({ status: "success", msg: `El usuario ${result.email} fue creado` })
 }
 

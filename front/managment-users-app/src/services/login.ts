@@ -9,6 +9,7 @@ export default async function loginUser(form: LoginUser) {
                 email,
                 password
             })
+        console.log(data)
         return data
     } catch (err: any) {
         return err.response.data

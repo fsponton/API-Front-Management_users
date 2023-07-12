@@ -1,7 +1,7 @@
 import { UpdateUser } from "../../types/types";
 import { parseRole, parseToString } from "../../utils/users";
 
-const toUpdateUser = (object: any): UpdateUser => {
+const toUpdateUserr = (object: any): UpdateUser => {
     const updateUserEntry: UpdateUser = {
         name: parseToString(object.name),
         email: parseToString(object.email).toLocaleLowerCase(),
@@ -11,4 +11,4 @@ const toUpdateUser = (object: any): UpdateUser => {
     return updateUserEntry
 }
 
-export default toUpdateUser;
+export default toUpdateUserr;
