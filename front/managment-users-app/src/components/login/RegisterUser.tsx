@@ -70,7 +70,7 @@ const RegisterUser: React.FC = () => {
                                         <button className="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
 
                                         <p className="mb-0 mt-4">
-                                            <a href="/login" className="text-white-50 fw-bold">Back to Login</a>
+                                            <a href="/" className="text-white-50 fw-bold">Back to Login</a>
                                         </p>
                                     </div>
                                 </Form>

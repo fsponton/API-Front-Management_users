@@ -1,9 +1,9 @@
 import { parseToString } from "../../utils/users";
 import { EmailUser } from "../../types/types";
 
-const toCheckEmaill = (emailToParse: string): EmailUser => {
+const toCheckEmaill = (formEmail: string): EmailUser => {
     const emailParsed: EmailUser = {
-        email: parseToString(emailToParse).toLocaleLowerCase()
+        email: parseToString(formEmail).toLocaleLowerCase()
     }
     return emailParsed
 }

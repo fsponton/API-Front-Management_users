@@ -1,59 +1,64 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router";
+import getUsers from '../../services/getUsers';
+import { AiTwotoneDelete } from "react-icons/ai";
+import { GrUpdate } from "react-icons/gr";
 const Dashboard = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const [allUsers, setAllUsers] = useState<any[]>([]);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    useEffect(() => {
+        const token = JSON.parse(sessionStorage.getItem(`token`) as string)
+        if (!token) {
+            navigate('/')
+        } else {
+            getUsers(token)
+                .then((users) => {
+                    setAllUsers(users)
+                })
+                .catch((err) => {
+                    console.log(`Error: ${err}`)
+                }
+                )
+        }
 
-    //     try {
-    //         // Envia una solicitud POST al backend de Strapi para autenticar al usuario
-    //         const response = await axios.post('http://localhost:1337/auth/local', {
-    //             identifier: email,
-    //             password: password
-    //         });
-
-    //         // Manejar la respuesta exitosa y guardar el token de acceso en el almacenamiento local
-    //         console.log('Token de acceso:', response.data.jwt);
-    //     } catch (error) {
-    //         // Manejar errores de autenticación
-    //         console.error('Error al iniciar sesión:', error);
-    //     }
-    // };
-
+    }, [])
+    console.log(allUsers)
     return (
-
-        <div>
-
-
-            <p>testing Dashboard</p>
-            {/* <form onSubmit={handleSubmit} >
-                <h2>Iniciar sesión < /h2>
-                    < div >
-                        <label htmlFor="email" > Correo electrónico: </label>
-                        < input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        < /div>
-                        < div >
-                            <label htmlFor="password" > Contraseña: </label>
-                            < input
-                                type="password"
-                                id="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            < /div>
-                            < button type="submit" > Iniciar sesión < /button>
-                                < /form>
-                                < /div> */}
-
-        </div>
+        <section className="vh-100 gradient-custom">
+            <div className="container py-5 h-100">
+                <div className="row d-flex justify-content-center align-items-center h-100" style={{ backgroundColor: 'black' }}>
+                    <table className="table table-hover">
+                        <thead className=' table-dark '>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Active</th>
+                                <th>Update</th>
+                                <th>Disabled</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {allUsers.map((u: any, index: number) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{u.name}</td>
+                                    <td>{u.email}</td>
+                                    <td>{u.role}</td>
+                                    <td>{u.active ? "Yes" : "No"}</td>
+                                    <td><GrUpdate /></td>
+                                    <td>boton disable</td>
+                                    <td><AiTwotoneDelete /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div >
+            </div>
+        </section>
     );
 };
 

@@ -6,8 +6,8 @@ import { toCheckEmaill } from "../../utils/FormVerification";
 
 
 const forgotPassword = async (req: Request, res: Response) => {
-
-    const userEmailEntry = toCheckEmaill(req.body) //middleware
+    const { email } = req.body
+    const userEmailEntry = toCheckEmaill(email) //middleware
     const mailOption = await findAndCreateMailOption(userEmailEntry)
 
     transporter.sendMail(mailOptions(mailOption.email, mailOption.slug), (err) => {

@@ -50,6 +50,9 @@ const ForgotPassword = () => {
 
                                     </div>
                                     <button className="btn btn-outline-light btn-lg px-5" type="submit">Submit</button>
+                                    <p className="mb-0 mt-4">
+                                        <a href="/" className="text-white-50 fw-bold">Back to Login</a>
+                                    </p>
 
                                 </Form>
                             </Formik>

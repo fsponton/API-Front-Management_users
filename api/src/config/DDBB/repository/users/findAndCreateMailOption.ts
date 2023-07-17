@@ -8,6 +8,7 @@ const prisma = new PrismaClient()
 
 export default async (formFromRequest: EmailUser) => {
     let verificationLink
+
     const user = await prisma.user.findUnique({ where: { email: formFromRequest.email } })
     const token = jwt.sign({ id: user?.id }, `${getEnviroments().SECRET_WORD}`, { expiresIn: '10m' })
 

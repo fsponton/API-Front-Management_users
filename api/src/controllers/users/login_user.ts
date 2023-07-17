@@ -14,9 +14,10 @@ const loginUser = async (req: any, res: Response) => {
 
     const token = jwt.sign(userForToken, `${getEnviroments().SECRET_WORD}`, { expiresIn: 60 * 60 })
 
+
     return res.status(200)
-        .header({ token: token })
-        .json({ status: "success", msg: ` ${userForToken.email} you are logged`, user: userForToken })
+        // .setHeader('Authorization', `Bearer ${token}`)
+        .send({ status: "success", msg: ` ${userForToken.email} you are logged`, token: token })
 }
 
 export default loginUser;

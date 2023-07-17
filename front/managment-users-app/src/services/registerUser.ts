@@ -8,7 +8,6 @@ export default async function registerUser(form: NewUser) {
             url: 'http://localhost:3005/new_user',
             data: form
         })
-        console.log(response.data)
         return response.data
     } catch (err: any) {
         console.log(err)

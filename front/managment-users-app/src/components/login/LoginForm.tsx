@@ -5,7 +5,6 @@ import loginSchema from './_yupSchemas/loginSchema';
 import loginUser from '../../services/login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const LoginForm = () => {
     const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ const LoginForm = () => {
                                             icon: 'success',
                                             title: `Hi ${result.msg}`,
                                         });
-                                        sessionStorage.setItem('token', JSON.stringify(result.user.token));
+                                        sessionStorage.setItem('token', JSON.stringify(result.token));
                                         navigate('/dashboard');
                                     } else {
                                         Swal.fire({
