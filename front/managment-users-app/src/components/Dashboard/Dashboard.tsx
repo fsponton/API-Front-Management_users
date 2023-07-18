@@ -1,43 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from "react-router";
-import getUsers from '../../services/getUsers';
+import { useUsers } from '../../hooks/useUsers';
 import { AiTwotoneDelete, AiOutlineEdit } from "react-icons/ai";
+import { encabezado } from '../../utils/encabezado';
+import ThTable from '../../_components/ThTable';
+import ModalEditUser from '../../_components/modalEditUser';
+import { EditUser } from '../../types/types';
+
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const [allUsers, setAllUsers] = useState<any[]>([]);
+    const token = JSON.parse(sessionStorage.getItem(`token`) as string)
+    const [userEdit, setUserEdit] = useState<EditUser | null>(null)
+
+    if (!token) {
+        navigate('/')
+    }
+
+    const allUsers = useUsers(token) //custom-hook
 
     const initStateModal = {
-        editUser: false,
-        disableUser: false,
-        deleteUser: false
+        edit: false,
     }
     const [modal, setIsOpen] = useState(initStateModal)
 
-    useEffect(() => {
-        const token = JSON.parse(sessionStorage.getItem(`token`) as string)
-        if (!token) {
-            navigate('/')
-        } else {
-            getUsers(token)
-                .then((users) => {
-                    setAllUsers(users)
-                })
-                .catch((err) => {
-                    console.log(`Error: ${err}`)
-                }
-                )
-        }
 
-    }, [])
-
-    const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const { name }: { name: string } = event.target as HTMLButtonElement;
+    const openModal = (event: React.MouseEvent<HTMLButtonElement>, user: any) => {
+        const { name }: { name: string } = event.currentTarget;
+        setUserEdit(user)
         setIsOpen({
             ...modal,
             [name]: true
         })
-        alert(`name: ${name}`)
     }
 
     const closeModal = () => {
@@ -52,14 +46,11 @@ const Dashboard = () => {
                     <table className="table table-hover">
                         <thead className=' table-dark '>
                             <tr>
-                                <th className="text-center">#</th>
-                                <th className="text-center">Name</th>
-                                <th className="text-center">Email</th>
-                                <th className="text-center">Role</th>
-                                <th className="text-center">Active</th>
-                                <th className="text-center">Disabled</th>
-                                <th className="text-center">Update</th>
-                                <th className="text-center">Delete</th>
+                                {encabezado.map((elem: string, index: number) => {
+                                    return (
+                                        <ThTable style={'text-center'} title={elem} key={index} />
+                                    )
+                                })}
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +62,7 @@ const Dashboard = () => {
                                     <td className="text-center">{u.role}</td>
                                     <td className="text-center">{u.active ? "Yes" : "No"}</td>
                                     <td className="text-center">boton disable</td>
-                                    <td className="text-center" ><button onClick={openModal} name='editUser'><AiOutlineEdit /></button></td>
+                                    <td className="text-center" ><button onClick={(e) => openModal(e, u)} name='edit'><AiOutlineEdit /></button></td>
                                     <td className="text-center"><AiTwotoneDelete /></td>
                                 </tr>
                             ))}
@@ -79,6 +70,7 @@ const Dashboard = () => {
                     </table>
                 </div >
             </div>
+            <ModalEditUser modal={modal} closeModal={closeModal} userEdit={userEdit} />
         </section>
     );
 };

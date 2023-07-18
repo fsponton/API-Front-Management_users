@@ -10,18 +10,18 @@ export interface User {
     role: Role
     password: string
     active: boolean
-    resetToken: string | null
 }
-
-
-export type LoginUser = Pick<Use, 'email', 'password'>
-
-export type EmailUser = pick<User, 'email'>
-
-export type NewUser = pick<User, 'name', 'email', 'password'>
 
 export interface ResetPW {
     password: string
     token: string
 }
 
+export type LoginUser = Pick<User, 'email', 'password'>
+
+export type EmailUser = pick<User, 'email'>
+
+export type NewUser = pick<User, 'name', 'email', 'password'>
+
+
+export type EditUser = Pick<User, 'id', 'email', 'active', 'name', 'role'>
