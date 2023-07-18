@@ -3,10 +3,11 @@ import { useNavigate } from "react-router";
 import { useUsers } from '../../hooks/useUsers';
 import { AiTwotoneDelete, AiOutlineEdit } from "react-icons/ai";
 import { encabezado } from '../../utils/encabezado';
-import ThTable from '../../_components/ThTable';
-import ModalEditUser from '../../_components/modalEditUser';
+import ThTable from '../../components/ThTable';
+import ModalEditUser from '../../components/modalEditUser';
 import { EditUser } from '../../types/types';
-
+import TdTable from '../../components/TdTable';
+import ModalDeleteUser from '../../components/modalDeleteUser';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -21,9 +22,10 @@ const Dashboard = () => {
 
     const initStateModal = {
         edit: false,
+        delete: false
     }
-    const [modal, setIsOpen] = useState(initStateModal)
 
+    const [modal, setIsOpen] = useState(initStateModal)
 
     const openModal = (event: React.MouseEvent<HTMLButtonElement>, user: any) => {
         const { name }: { name: string } = event.currentTarget;
@@ -37,7 +39,6 @@ const Dashboard = () => {
     const closeModal = () => {
         setIsOpen(initStateModal)
     }
-
 
     return (
         <section className="vh-100 gradient-custom">
@@ -56,14 +57,34 @@ const Dashboard = () => {
                         <tbody>
                             {allUsers.map((u: any, index: number) => (
                                 <tr key={index}>
-                                    <td className="text-center">{index + 1}</td>
-                                    <td className="text-center">{u.name}</td>
-                                    <td className="text-center">{u.email}</td>
-                                    <td className="text-center">{u.role}</td>
-                                    <td className="text-center">{u.active ? "Yes" : "No"}</td>
+                                    <TdTable style={'text-center'} info={(index + 1).toString()} />
+                                    <TdTable style={'text-center'} info={u.name} />
+                                    <TdTable style={'text-center'} info={u.email} />
+                                    <TdTable style={'text-center'} info={u.role} />
+                                    <TdTable style={'text-center'} info={u.active ? "Yes" : "No"} />
                                     <td className="text-center">boton disable</td>
-                                    <td className="text-center" ><button onClick={(e) => openModal(e, u)} name='edit'><AiOutlineEdit /></button></td>
-                                    <td className="text-center"><AiTwotoneDelete /></td>
+                                    <TdTable style={'text-center'}  >
+                                        <button onClick={(ev) => openModal(ev, u)} name='edit'
+                                            style={{
+                                                background: 'none',
+                                                border: 'none',
+                                                padding: 0,
+                                                cursor: 'pointer'
+                                            }}><AiOutlineEdit />
+                                        </button>
+                                    </TdTable>
+                                    <td className="text-center">
+                                        <button onClick={(ev) => openModal(ev, u)} name='delete'
+                                            style={{
+                                                background: 'none',
+                                                border: 'none',
+                                                padding: 0,
+                                                cursor: 'pointer'
+                                            }}>
+                                            <AiTwotoneDelete />
+                                        </button>
+
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -71,6 +92,7 @@ const Dashboard = () => {
                 </div >
             </div>
             <ModalEditUser modal={modal} closeModal={closeModal} userEdit={userEdit} />
+            <ModalDeleteUser modal={modal} closeModal={closeModal} />
         </section>
     );
 };

@@ -8,7 +8,6 @@ export default async function getUsers(token: string) {
             url: 'http://localhost:3005/',
             headers: { Authorization: `Bearer ${token}` }
         })
-        console.log(response.data.users)
         return response.data.users
     } catch (err: any) {
         return err.response.data

@@ -1,10 +1,8 @@
 import Modal from "react-modal"
-import FormEditUser from "./formEditUser"
-
-const ModalEditUser = (props: any) => {
-    const { userEdit, modal, closeModal } = props
 
 
+const ModalDeleteUser = (props: any) => {
+    const { modal, closeModal } = props
     return (
         <Modal
             style={{
@@ -14,16 +12,16 @@ const ModalEditUser = (props: any) => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: 'rgba(255, 255, 255, 0.75)'
+                    backgroundColor: 'rgba(255, 255, 255, 0)'
                 },
                 content: {
                     position: 'absolute',
                     top: '15%',
                     left: '15%',
                     right: '15%',
-                    bottom: 'auto',
+                    bottom: '15%',
                     border: '1px solid #000',
-                    background: '#fff',
+                    background: '#F1EFEE',
                     overflow: 'auto',
                     WebkitOverflowScrolling: 'touch',
                     borderRadius: '4px',
@@ -32,27 +30,24 @@ const ModalEditUser = (props: any) => {
                 }
             }}
             ariaHideApp={false}
-            isOpen={modal.edit}
+            isOpen={modal.delete}
             onRequestClose={closeModal}
             className=""
             contentLabel="Example Modal"
         >
             <div className='row'>
-                <div className='col d-flex  justify-content-start'>   <h2>Edit User</h2>  </div>
+                <div className='col d-flex  justify-content-start'>   <h2>Delete User</h2>  </div>
                 <div className='col d-flex  justify-content-end'>    <button className='btn btn-danger' onClick={closeModal}>x</button></div>
             </div>
             <div className='row mt-4  me-2  ms-2'>
                 <div className="col col-lg-12 " >
                     <div className="row">
-                        <FormEditUser userEdit={userEdit} />
-                        {/* <p>{userEdit}</p> */}
-                        {/* <FormEditProduct closeModalEdit={closeModalEdit} setReload={setReload} categories={categories} product={product} /> */}
+                        {/* <FormEditUser userEdit={userEdit} /> */}
                     </div>
                 </div>
             </div>
-
         </Modal >
     )
 }
 
-export default ModalEditUser;
+export default ModalDeleteUser;
