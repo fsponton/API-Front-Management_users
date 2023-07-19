@@ -1,1 +1,1 @@
-export const encabezado = ['#', 'Name', 'Email', 'Role', 'Active', 'Disabled', 'Edit', 'Delete']
+export const encabezado = ['#', 'Email', 'Name', 'Role', 'Active', 'Edit', 'Delete']

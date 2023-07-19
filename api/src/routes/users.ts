@@ -8,7 +8,7 @@ routerUsers.post("/new_user", verifyExistence, registerUser)
 
 routerUsers.post("/login", verifyLogin, loginUser)
 
-routerUsers.post("/update_user", verifyToken, findUser, updateUser)
+routerUsers.put("/update_user", verifyToken, findUser, updateUser)
 
 routerUsers.post("/delete_user", verifyToken, findUser, deleteUser)
 

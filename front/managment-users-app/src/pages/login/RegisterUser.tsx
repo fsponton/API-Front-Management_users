@@ -2,7 +2,7 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Swal from 'sweetalert2';
-import registrationSchema from './_yupSchemas/registrationSchema';
+import registrationSchema from '../../utils/_yupSchemas/registrationSchema';
 import { NewUser } from '../../types/types';
 import registerUser from "../../services/registerUser";
 

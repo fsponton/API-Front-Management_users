@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Swal from "sweetalert2";
-import emailSchema from './_yupSchemas/emailSchema';
+import emailSchema from '../../utils/_yupSchemas/emailSchema';
 import forgotPassword from '../../services/forgotPassword';
 import { useNavigate } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';

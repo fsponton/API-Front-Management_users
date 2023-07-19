@@ -17,13 +17,13 @@ const Dashboard = () => {
     if (!token) {
         navigate('/')
     }
-
-    const allUsers = useUsers(token) //custom-hook
-
     const initStateModal = {
         edit: false,
         delete: false
     }
+
+    const allUsers = useUsers(token, initStateModal) //custom-hook
+
 
     const [modal, setIsOpen] = useState(initStateModal)
 
@@ -56,13 +56,13 @@ const Dashboard = () => {
                         </thead>
                         <tbody>
                             {allUsers.map((u: any, index: number) => (
-                                <tr key={index}>
+
+                                <tr key={index} >
                                     <TdTable style={'text-center'} info={(index + 1).toString()} />
-                                    <TdTable style={'text-center'} info={u.name} />
                                     <TdTable style={'text-center'} info={u.email} />
+                                    <TdTable style={'text-center'} info={u.name} />
                                     <TdTable style={'text-center'} info={u.role} />
-                                    <TdTable style={'text-center'} info={u.active ? "Yes" : "No"} />
-                                    <td className="text-center">boton disable</td>
+                                    <TdTable style={'text-center fw-semibold'} info={u.active ? "Yes" : "No"} />
                                     <TdTable style={'text-center'}  >
                                         <button onClick={(ev) => openModal(ev, u)} name='edit'
                                             style={{
@@ -91,7 +91,7 @@ const Dashboard = () => {
                     </table>
                 </div >
             </div>
-            <ModalEditUser modal={modal} closeModal={closeModal} userEdit={userEdit} />
+            <ModalEditUser modal={modal} closeModal={closeModal} userEdit={userEdit} token={token} />
             <ModalDeleteUser modal={modal} closeModal={closeModal} />
         </section>
     );

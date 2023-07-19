@@ -1,66 +1,53 @@
 import { EditUser } from '../types/types'
-import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-
+import editUserSchema from '../utils/_yupSchemas/editUserSchema';
+import updateUser from '../services/updateUser';
+import Swal from 'sweetalert2';
 
 const FormEditUser = (props: EditUser) => {
-    const { userEdit } = props
-
-    const [input, setInput] = useState({
-        id: userEdit.id,
-        name: userEdit.name,
-        email: userEdit.email,
-        role: userEdit.role,
-        active: userEdit.active
-    })
-
-
-    const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, name } = event.target;
-        setInput({
-            ...input,
-            [name]: value
-        })
-    }
-
-    console.log("active????", userEdit.active)
+    const { userEdit, token, closeModal } = props
 
     return (
         <>
             <Formik
                 initialValues={{
-                    name: input.name,
-                    role: input.role,
-                    active: input.active,
+                    email: userEdit.email,
+                    name: userEdit.name,
+                    role: userEdit.role,
+                    active: userEdit.active === true ? "yes" : "no",
                 }}
-                // validationSchema={ }
+                validationSchema={editUserSchema}
                 onSubmit={async values => {
-                    const result = await (values);
-                    if (result === 'success') {
-                        // Swal.fire({
-                        //     icon: 'success',
-                        //     title: `Hi ${result.msg}`,
-                        // });
-                        // sessionStorage.setItem('token', JSON.stringify(result.token));
-                        // navigate('/dashboard');
+                    const form = {
+                        token,
+                        email: userEdit.email,
+                        name: values.name,
+                        role: values.role,
+                        active: values.active === "yes" ? true : false
+                    }
+                    const result = await updateUser(form);
+                    if (result.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: ` ${result.msg}`,
+                        });
+                        closeModal()
                     } else {
-                        // Swal.fire({
-                        //     icon: 'error',
-                        //     title: 'Email or password not found',
-                        //     text: 'Check info',
-                        // });
+                        Swal.fire({
+                            icon: 'error',
+                            title: `${result.msg}`
+                        });
                     }
                 }}
             >
                 <Form className='card-body p-5 text-center'>
                     <div className='mb-md-5 mt-md-4 pb-5'>
                         <h3 className='mb-5 text-uppercase'>User Edition</h3>
-
                         <div className='form-outline form-white mb-4'>
                             <label htmlFor='name' className='form-label'>
                                 Name: {userEdit.name}
                             </label>
-                            <Field className='form-control form-control-lg' id='name' name='name' value={input.name} onChange={handlerChange} />
+                            <Field className='form-control form-control-lg' id='name' name='name' />
                             <ErrorMessage name='name' component='div' className='text-danger' />
                         </div>
 
@@ -68,7 +55,7 @@ const FormEditUser = (props: EditUser) => {
                             <label htmlFor='role' className='form-label'>
                                 Role: {userEdit.role}
                             </label>
-                            <Field as="select" className='form-control form-control-lg' id='role' name='role' value={input.role} onChange={handlerChange}>
+                            <Field as="select" className='form-control form-control-lg' id='role' name='role'>
                                 <option value="user">user</option>
                                 <option value="admin">admin</option>
                             </Field>
@@ -77,11 +64,11 @@ const FormEditUser = (props: EditUser) => {
 
                         <div className='form-outline form-white mb-4'>
                             <label className='form-label' htmlFor='active'>
-                                Active: {userEdit.active === true ? "yes" : "no"}
+                                Active: {userEdit.active === true ? "true" : "false"}
                             </label>
-                            <Field as="select" className='form-control form-control-lg' id='active' name='active'  >
-                                <option value="user">yes</option>
-                                <option value="admin">no</option>
+                            <Field as="select" className='form-control form-control-lg' id='active' name='active'>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
                             </Field>
                             <ErrorMessage name='active' component='div' className='text-danger' />
                         </div>
@@ -93,7 +80,6 @@ const FormEditUser = (props: EditUser) => {
                     </div>
                 </Form>
             </Formik >
-            <div><p>{userEdit.id}</p></div>
         </>
     )
 }

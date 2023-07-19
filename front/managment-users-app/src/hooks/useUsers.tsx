@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import getUsers from '../services/getUsers';
 
-export const useUsers = (token: string) => {
+export const useUsers = (token: string, initStateModal: any) => {
     const [allUsers, setAllUsers] = useState<any[]>([]);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ export const useUsers = (token: string) => {
                 }
                 )
         }
-    }, [token])
+    }, [token, initStateModal])
 
     return allUsers
 }

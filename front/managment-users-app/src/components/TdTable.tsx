@@ -6,7 +6,7 @@ interface Props {
 
 
 const TdTable = ({ style, info, children }: Props): JSX.Element => {
-    return (<td className={style}>
+    return (<td className={info === "No" ? `text-danger  ${style}` : info === "Yes" ? `text-success  ${style}` : `${style}`}>
         {info}
         {children}
     </td>)

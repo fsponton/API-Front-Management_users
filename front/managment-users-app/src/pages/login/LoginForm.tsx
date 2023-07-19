@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import loginSchema from './_yupSchemas/loginSchema';
+import loginSchema from '../../utils/_yupSchemas/loginSchema';
 import loginUser from '../../services/login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

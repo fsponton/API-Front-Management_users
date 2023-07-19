@@ -24,3 +24,4 @@ export type EmailUser = pick<User, 'email'>
 export type NewUser = pick<User, 'name', 'email', 'password'>
 
 export type EditUser = Pick<User, 'id', 'email', 'active', 'name', 'role'>
+

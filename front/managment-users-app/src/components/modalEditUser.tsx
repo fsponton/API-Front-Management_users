@@ -2,7 +2,7 @@ import Modal from "react-modal"
 import FormEditUser from "./formEditUser"
 
 const ModalEditUser = (props: any) => {
-    const { userEdit, modal, closeModal } = props
+    const { userEdit, modal, closeModal, token } = props
     return (
         <Modal
             style={{
@@ -42,7 +42,7 @@ const ModalEditUser = (props: any) => {
             <div className='row mt-4  me-2  ms-2'>
                 <div className="col col-lg-12 " >
                     <div className="row">
-                        <FormEditUser userEdit={userEdit} />
+                        <FormEditUser userEdit={userEdit} token={token} closeModal={closeModal} />
                     </div>
                 </div>
             </div>

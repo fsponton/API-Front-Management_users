@@ -2,7 +2,7 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useParams } from 'react-router-dom';
-import passwordSchema from './_yupSchemas/passwordSchema';
+import passwordSchema from '../../utils/_yupSchemas/passwordSchema';
 import resetPassword from '../../services/resetPasword';
 import Swal from "sweetalert2";
 import { ResetPW } from '../../types/types';

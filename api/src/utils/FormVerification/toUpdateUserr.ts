@@ -6,7 +6,7 @@ const toUpdateUserr = (object: any): UpdateUser => {
         name: parseToString(object.name),
         email: parseToString(object.email).toLocaleLowerCase(),
         role: parseRole(object.role).toLocaleLowerCase(),
-        password: parseToString(object.password)
+        active: Boolean(object.active)
     }
     return updateUserEntry
 }
