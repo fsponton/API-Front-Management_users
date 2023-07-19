@@ -27,7 +27,6 @@ const ResetPasswordd: React.FC = () => {
                                         password: values.password,
                                         token: token
                                     }
-                                    console.log(form)
                                     const result = await resetPassword(form)
                                     if (result.status === "success") {
                                         Swal.fire({
