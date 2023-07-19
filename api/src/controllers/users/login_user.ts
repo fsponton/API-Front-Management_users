@@ -9,15 +9,15 @@ const loginUser = async (req: any, res: Response) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        role: user.role
+        role: user.role,
+        active: user.active
     }
 
     const token = jwt.sign(userForToken, `${getEnviroments().SECRET_WORD}`, { expiresIn: 60 * 60 })
 
 
     return res.status(200)
-        // .setHeader('Authorization', `Bearer ${token}`)
-        .send({ status: "success", msg: ` ${userForToken.email} you are logged`, token: token })
+        .send({ status: "success", email: ` ${userForToken.email} `, token: token, active: user.active })
 }
 
 export default loginUser;

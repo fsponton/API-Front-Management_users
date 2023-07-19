@@ -22,10 +22,17 @@ const LoginForm = () => {
                                 validationSchema={loginSchema}
                                 onSubmit={async values => {
                                     const result = await loginUser(values);
+                                    if (!result.active) {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: `Hi ${result.email}, your account is not active`,
+                                        });
+                                        return
+                                    }
                                     if (result.status === 'success') {
                                         Swal.fire({
                                             icon: 'success',
-                                            title: `Hi ${result.msg}`,
+                                            title: `Hi ${result.email} you are logged`,
                                         });
                                         sessionStorage.setItem('token', JSON.stringify(result.token));
                                         navigate('/dashboard');

@@ -8,6 +8,8 @@ import ModalEditUser from '../../components/modalEditUser';
 import { EditUser } from '../../types/types';
 import TdTable from '../../components/TdTable';
 import ModalDeleteUser from '../../components/modalDeleteUser';
+import decode from '../../helpers/decodeToken';
+import Swal from 'sweetalert2';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -17,6 +19,8 @@ const Dashboard = () => {
     if (!token) {
         navigate('/')
     }
+    const userLogged = decode(token)
+
     const initStateModal = {
         edit: false,
         delete: false
@@ -24,10 +28,16 @@ const Dashboard = () => {
 
     const allUsers = useUsers(token, initStateModal) //custom-hook
 
-
     const [modal, setIsOpen] = useState(initStateModal)
 
     const openModal = (event: React.MouseEvent<HTMLButtonElement>, user: any) => {
+        if (userLogged?.role != "admin") {
+            Swal.fire({
+                icon: 'error',
+                title: `Hi ${userLogged?.email},  your role is not admin and your don't have permissions`,
+            });
+            return
+        }
         const { name }: { name: string } = event.currentTarget;
         setUserEdit(user)
         setIsOpen({
@@ -56,7 +66,6 @@ const Dashboard = () => {
                         </thead>
                         <tbody>
                             {allUsers.map((u: any, index: number) => (
-
                                 <tr key={index} >
                                     <TdTable style={'text-center'} info={(index + 1).toString()} />
                                     <TdTable style={'text-center'} info={u.email} />
