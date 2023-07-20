@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router";
 import { useUsers } from '../../hooks/useUsers';
-import { AiTwotoneDelete, AiOutlineEdit } from "react-icons/ai";
+import { AiTwotoneDelete, AiOutlineEdit, AiTwotoneSetting } from "react-icons/ai";
 import { encabezado } from '../../utils/encabezado';
 import ThTable from '../../components/ThTable';
 import ModalEditUser from '../../components/modalEditUser';
@@ -10,6 +10,7 @@ import TdTable from '../../components/TdTable';
 import ModalDeleteUser from '../../components/modalDeleteUser';
 import decode from '../../helpers/decodeToken';
 import Swal from 'sweetalert2';
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Dashboard = () => {
         if (userLogged?.role != "admin") {
             Swal.fire({
                 icon: 'warning',
-                title: `Hi ${userLogged?.email},  your role is not admin and your don't have permissions`,
+                title: `Hi ${userLogged?.email},  you don't have permissions`,
             });
             return
         }
@@ -55,9 +56,18 @@ const Dashboard = () => {
             <div className="container py-5 h-100">
                 <div className="row d-flex align-items-center" style={{ backgroundColor: 'black' }}>
                     <div className="col"></div>
-                    <div className="col-auto mb-5">
-                        <button className="btn btn-secondary btn-sm">config</button>
+
+                    <div className="col-auto mb-5 ">
+                        <div className="btn-group dropstart" >
+                            <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><AiTwotoneSetting /></button>
+                            <ul className="dropdown-menu dropdown-menu-secondary ">
+                                <li onClick={() => alert('programar')}><a className="dropdown-item"  >Change Password </a></li>
+                                <li><p className="dropdown-divider"> </p></li>
+                                <li ><a className="dropdown-item" href="#">Log off</a></li>
+                            </ul>
+                        </div>
                     </div>
+
                     <div className="justify-content-center align-items-center mt-5" style={{ backgroundColor: 'black' }}>
                         <table className="table table-hover justify-content-center">
                             <thead className=' table-dark '>
@@ -97,7 +107,6 @@ const Dashboard = () => {
                                                 }}>
                                                 <AiTwotoneDelete />
                                             </button>
-
                                         </td>
                                     </tr>
                                 ))}

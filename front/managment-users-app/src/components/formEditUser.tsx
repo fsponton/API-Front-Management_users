@@ -41,7 +41,7 @@ const FormEditUser = (props: EditUser) => {
             >
                 <Form className='card-body p-5 text-center'>
                     <div className='mb-md-5 mt-md-4 pb-5'>
-                        <h3 className='mb-5 text-uppercase'>User Edition</h3>
+                        <h3 className='mb-3 text-uppercase'>User Edition</h3>
                         <div className='form-outline form-white mb-4'>
                             <label htmlFor='name' className='form-label'>
                                 Name: {user.name}

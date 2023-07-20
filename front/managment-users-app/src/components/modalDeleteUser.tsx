@@ -16,17 +16,18 @@ const ModalDeleteUser = (props: any) => {
                 },
                 content: {
                     position: 'absolute',
-                    top: '15%',
-                    left: '15%',
-                    right: '15%',
-                    bottom: '15%',
+                    top: '30%',
+                    left: '25%',
+                    right: '25%',
+                    bottom: '30%',
                     border: '1px solid #000',
-                    background: '#F1EFEE',
-                    overflow: 'auto',
+                    color: '#fff',
+                    backgroundColor: 'rgba(52, 58, 64, 1)',
+                    overflow: 'hidden',
                     WebkitOverflowScrolling: 'touch',
                     borderRadius: '4px',
                     outline: 'none',
-                    padding: '20px'
+                    padding: '20px',
                 }
             }}
             ariaHideApp={false}
@@ -36,10 +37,9 @@ const ModalDeleteUser = (props: any) => {
             contentLabel="Example Modal"
         >
             <div className='row'>
-                <div className='col d-flex  justify-content-start'>   <h2>Delete User</h2>  </div>
                 <div className='col d-flex  justify-content-end'>    <button className='btn btn-danger' onClick={closeModal}>x</button></div>
             </div>
-            <div className='row mt-4  me-2  ms-2'>
+            <div className='row '>
                 <div className="col col-lg-12 " >
                     <div className="row">
                         <FormDeleteUser user={user} token={token} closeModal={closeModal} />
