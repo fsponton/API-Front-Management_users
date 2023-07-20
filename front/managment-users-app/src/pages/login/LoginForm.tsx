@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import loginSchema from '../../utils/_yupSchemas/loginSchema';
 import loginUser from '../../services/login';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getEnviroments } from '../../config/enviroments';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ const LoginForm = () => {
                                             icon: 'success',
                                             title: `Hi ${result.email} you are logged`,
                                         });
-                                        sessionStorage.setItem('token', JSON.stringify(result.token));
+                                        sessionStorage.setItem(getEnviroments().PW_SESSION, JSON.stringify(result.token));
                                         navigate('/dashboard');
                                     } else {
                                         Swal.fire({

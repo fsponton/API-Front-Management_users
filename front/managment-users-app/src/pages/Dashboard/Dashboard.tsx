@@ -11,10 +11,11 @@ import ModalDeleteUser from '../../components/modalDeleteUser';
 import decode from '../../helpers/decodeToken';
 import Swal from 'sweetalert2';
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import { getEnviroments } from '../../config/enviroments';
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const token = JSON.parse(sessionStorage.getItem(`token`) as string)
+    const token = JSON.parse(sessionStorage.getItem(getEnviroments().PW_SESSION) as string)
     const [user, setUser] = useState<EditUser | null>(null)
 
     if (!token) {
@@ -51,6 +52,11 @@ const Dashboard = () => {
         setIsOpen(initStateModal)
     }
 
+    const logOff = () => {
+        sessionStorage.removeItem(getEnviroments().PW_SESSION);
+        navigate("/")
+    }
+
     return (
         <section className="vh-100 gradient-custom">
             <div className="container py-5 h-100">
@@ -62,8 +68,8 @@ const Dashboard = () => {
                             <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><AiTwotoneSetting /></button>
                             <ul className="dropdown-menu dropdown-menu-secondary ">
                                 <li onClick={() => alert('programar')}><a className="dropdown-item"  >Change Password </a></li>
-                                <li><p className="dropdown-divider"> </p></li>
-                                <li ><a className="dropdown-item" href="#">Log off</a></li>
+                                <li><hr className="dropdown-divider" /> </li>
+                                <li onClick={() => logOff()} ><a className="dropdown-item" href="#">Log off</a></li>
                             </ul>
                         </div>
                     </div>

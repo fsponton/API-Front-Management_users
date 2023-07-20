@@ -1,5 +1,5 @@
 export interface Enviroments {
-    PW_SESSION: string | undefined,
+    PW_SESSION: string,
     PORT: number
 }
 
