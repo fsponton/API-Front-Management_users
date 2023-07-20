@@ -12,6 +12,7 @@ import decode from '../../helpers/decodeToken';
 import Swal from 'sweetalert2';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { getEnviroments } from '../../config/enviroments';
+import ModalChangePassword from '../../components/modalChangePassword';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -25,14 +26,25 @@ const Dashboard = () => {
 
     const initStateModal = {
         edit: false,
-        delete: false
+        delete: false,
+        password: false
     }
 
-    const allUsers = useUsers(token, initStateModal) //custom-hook
+    const allUsers = useUsers(token) //custom-hook
 
     const [modal, setIsOpen] = useState(initStateModal)
 
     const openModal = (event: React.MouseEvent<HTMLButtonElement>, user: any) => {
+        const { name }: { name: string } = event.currentTarget;
+
+        if (name === 'password') {
+            setIsOpen({
+                ...modal,
+                [name]: true
+            })
+            return
+        }
+
         if (userLogged?.role != "admin") {
             Swal.fire({
                 icon: 'warning',
@@ -40,7 +52,6 @@ const Dashboard = () => {
             });
             return
         }
-        const { name }: { name: string } = event.currentTarget;
         setUser(user)
         setIsOpen({
             ...modal,
@@ -50,6 +61,7 @@ const Dashboard = () => {
 
     const closeModal = () => {
         setIsOpen(initStateModal)
+        setUser(null)
     }
 
     const logOff = () => {
@@ -67,7 +79,17 @@ const Dashboard = () => {
                         <div className="btn-group dropstart" >
                             <button type="button" className="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><AiTwotoneSetting /></button>
                             <ul className="dropdown-menu dropdown-menu-secondary ">
-                                <li onClick={() => alert('programar')}><a className="dropdown-item"  >Change Password </a></li>
+                                <li >
+                                    <button onClick={(ev) => openModal(ev, userLogged)}
+                                        style={{
+                                            background: 'none',
+                                            border: 'none',
+                                            paddingLeft: 10,
+                                            cursor: 'pointer'
+                                        }}
+                                        name='password'
+                                    >Change Password</button>
+                                </li>
                                 <li><hr className="dropdown-divider" /> </li>
                                 <li onClick={() => logOff()} ><a className="dropdown-item" href="#">Log off</a></li>
                             </ul>
@@ -122,6 +144,7 @@ const Dashboard = () => {
                 </div>
                 <ModalEditUser modal={modal} closeModal={closeModal} user={user} token={token} />
                 <ModalDeleteUser modal={modal} closeModal={closeModal} user={user} token={token} />
+                <ModalChangePassword modal={modal} closeModal={closeModal} token={token} />
             </div>
         </section >
     );

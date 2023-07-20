@@ -8,6 +8,7 @@ export default async ({ id, passwordHash }: { id: string; passwordHash: string }
 
     const user = await prisma.user.findUnique({ where: { id } });
 
+    //The first condition to reset the password is when the forgot password is requested by entering the email 
     if (user?.resetToken) {
 
         const decode = jwt.decode(user.resetToken, { complete: true, key: getEnviroments().SECRET_WORD } as DecodeOptions) as JwtPayload;;
@@ -27,6 +28,18 @@ export default async ({ id, passwordHash }: { id: string; passwordHash: string }
             });
             return user;
         }
+    }
+    //this condition is when you reset from the dashboard
+    else {
+        await prisma.user.update({
+            where: {
+                id,
+            },
+            data: {
+                password: passwordHash
+            }
+        });
+        return user;
     }
     return false;
 };
