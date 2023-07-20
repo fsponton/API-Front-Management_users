@@ -17,7 +17,7 @@ const verifyToken = (req: any, _res: Response, next: NextFunction) => {
     if (!token || !decodedToken.payload.exp) { throw new TokenError('Token missing or invalid', 401) }
 
     req.userId = decodedToken.payload.id
-
+    console.log("paso")
     return next()
 
 }

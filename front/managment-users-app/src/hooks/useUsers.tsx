@@ -17,5 +17,10 @@ export const useUsers = (token: string) => {
         }
     }, [token])
 
-    return allUsers
+
+    const obj = {
+        allUsers,
+        setAllUsers
+    }
+    return obj
 }

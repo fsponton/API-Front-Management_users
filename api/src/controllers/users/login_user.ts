@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken"
 
 const loginUser = async (req: any, res: Response) => {
     const { user } = req
+    console.log(user)
+
 
     const userForToken = {
         id: user.id,

@@ -18,7 +18,6 @@ const FormDeleteUser = (props: any) => {
                         Swal.fire({
                             icon: 'warning',
                             title: 'Check for delete',
-
                         })
                         return
                     }

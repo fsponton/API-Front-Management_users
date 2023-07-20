@@ -13,25 +13,27 @@ import Swal from 'sweetalert2';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { getEnviroments } from '../../config/enviroments';
 import ModalChangePassword from '../../components/modalChangePassword';
+import getUsers from '../../services/getUsers';
+
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const token = JSON.parse(sessionStorage.getItem(getEnviroments().PW_SESSION) as string)
-    const [user, setUser] = useState<EditUser | null>(null)
+    const [user, setUser] = useState<EditUser | null>({})
 
     if (!token) {
         navigate('/')
     }
     const userLogged = decode(token)
-
+    console.log(userLogged)
     const initStateModal = {
         edit: false,
         delete: false,
         password: false
     }
 
-    const allUsers = useUsers(token) //custom-hook
-
+    let { allUsers, setAllUsers }: any = useUsers(token)//custom-hook
+    // console.log(allUsers)
     const [modal, setIsOpen] = useState(initStateModal)
 
     const openModal = (event: React.MouseEvent<HTMLButtonElement>, user: any) => {
@@ -59,9 +61,11 @@ const Dashboard = () => {
         })
     }
 
-    const closeModal = () => {
+    const closeModal = async () => {
         setIsOpen(initStateModal)
-        setUser(null)
+        setUser({})
+        allUsers = await getUsers(token)
+        setAllUsers(allUsers)
     }
 
     const logOff = () => {
