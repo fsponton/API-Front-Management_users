@@ -5,22 +5,21 @@ import updateUser from '../services/updateUser';
 import Swal from 'sweetalert2';
 
 const FormEditUser = (props: EditUser) => {
-    const { userEdit, token, closeModal } = props
-
+    const { user, token, closeModal } = props
     return (
         <>
             <Formik
                 initialValues={{
-                    email: userEdit.email,
-                    name: userEdit.name,
-                    role: userEdit.role,
-                    active: userEdit.active === true ? "yes" : "no",
+                    email: user.email,
+                    name: user.name,
+                    role: user.role,
+                    active: user.active === true ? "yes" : "no",
                 }}
                 validationSchema={editUserSchema}
                 onSubmit={async values => {
                     const form = {
                         token,
-                        email: userEdit.email,
+                        email: user.email,
                         name: values.name,
                         role: values.role,
                         active: values.active === "yes" ? true : false
@@ -45,7 +44,7 @@ const FormEditUser = (props: EditUser) => {
                         <h3 className='mb-5 text-uppercase'>User Edition</h3>
                         <div className='form-outline form-white mb-4'>
                             <label htmlFor='name' className='form-label'>
-                                Name: {userEdit.name}
+                                Name: {user.name}
                             </label>
                             <Field className='form-control form-control-lg' id='name' name='name' />
                             <ErrorMessage name='name' component='div' className='text-danger' />
@@ -53,7 +52,7 @@ const FormEditUser = (props: EditUser) => {
 
                         <div className='form-outline form-white mb-4'>
                             <label htmlFor='role' className='form-label'>
-                                Role: {userEdit.role}
+                                Role: {user.role}
                             </label>
                             <Field as="select" className='form-control form-control-lg' id='role' name='role'>
                                 <option value="user">user</option>
@@ -64,7 +63,7 @@ const FormEditUser = (props: EditUser) => {
 
                         <div className='form-outline form-white mb-4'>
                             <label className='form-label' htmlFor='active'>
-                                Active: {userEdit.active === true ? "true" : "false"}
+                                Active: {user.active === true ? "true" : "false"}
                             </label>
                             <Field as="select" className='form-control form-control-lg' id='active' name='active'>
                                 <option value="yes">yes</option>

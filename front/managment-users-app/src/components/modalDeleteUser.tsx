@@ -1,8 +1,8 @@
 import Modal from "react-modal"
-
+import FormDeleteUser from "./formDeleteUser"
 
 const ModalDeleteUser = (props: any) => {
-    const { modal, closeModal } = props
+    const { modal, closeModal, user, token } = props
     return (
         <Modal
             style={{
@@ -42,7 +42,7 @@ const ModalDeleteUser = (props: any) => {
             <div className='row mt-4  me-2  ms-2'>
                 <div className="col col-lg-12 " >
                     <div className="row">
-                        {/* <FormEditUser userEdit={userEdit} /> */}
+                        <FormDeleteUser user={user} token={token} closeModal={closeModal} />
                     </div>
                 </div>
             </div>

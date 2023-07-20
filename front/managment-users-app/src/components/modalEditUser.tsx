@@ -2,7 +2,7 @@ import Modal from "react-modal"
 import FormEditUser from "./formEditUser"
 
 const ModalEditUser = (props: any) => {
-    const { userEdit, modal, closeModal, token } = props
+    const { user, modal, closeModal, token } = props
     return (
         <Modal
             style={{
@@ -26,7 +26,8 @@ const ModalEditUser = (props: any) => {
                     WebkitOverflowScrolling: 'touch',
                     borderRadius: '4px',
                     outline: 'none',
-                    padding: '20px'
+                    padding: '20px',
+
                 }
             }}
             ariaHideApp={false}
@@ -42,11 +43,12 @@ const ModalEditUser = (props: any) => {
             <div className='row mt-4  me-2  ms-2'>
                 <div className="col col-lg-12 " >
                     <div className="row">
-                        <FormEditUser userEdit={userEdit} token={token} closeModal={closeModal} />
+                        <FormEditUser user={user} token={token} closeModal={closeModal} />
                     </div>
                 </div>
             </div>
         </Modal >
+
     )
 }
 
