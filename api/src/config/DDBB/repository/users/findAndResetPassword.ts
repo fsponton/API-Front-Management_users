@@ -10,7 +10,6 @@ export default async ({ id, passwordHash }: { id: string; passwordHash: string }
 
     //The first condition to reset the password is when the forgot password is requested by entering the email 
     if (user?.resetToken) {
-
         const decode = jwt.decode(user.resetToken, { complete: true, key: getEnviroments().SECRET_WORD } as DecodeOptions) as JwtPayload;;
 
         const date = new Date();
@@ -41,5 +40,5 @@ export default async ({ id, passwordHash }: { id: string; passwordHash: string }
         });
         return user;
     }
-    return false;
+    // return false;
 };

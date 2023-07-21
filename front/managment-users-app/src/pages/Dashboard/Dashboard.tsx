@@ -25,7 +25,7 @@ const Dashboard = () => {
         navigate('/')
     }
     const userLogged = decode(token)
-    console.log(userLogged)
+
     const initStateModal = {
         edit: false,
         delete: false,
@@ -33,7 +33,7 @@ const Dashboard = () => {
     }
 
     let { allUsers, setAllUsers }: any = useUsers(token)//custom-hook
-    // console.log(allUsers)
+
     const [modal, setIsOpen] = useState(initStateModal)
 
     const openModal = (event: React.MouseEvent<HTMLButtonElement>, user: any) => {
