@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import editUserSchema from '../utils/_yupSchemas/editUserSchema';
 import updateUser from '../services/updateUser';
 import Swal from 'sweetalert2';
+import ValidatePassword from '../utils/validatePassword';
 
 const FormEditUser = (props: EditUser) => {
     const { user, token, closeModal } = props
@@ -17,12 +18,15 @@ const FormEditUser = (props: EditUser) => {
                 }}
                 validationSchema={editUserSchema}
                 onSubmit={async values => {
+                    const password = await ValidatePassword()
+                    if (!password) { return }
                     const form = {
                         token,
                         email: user.email,
                         name: values.name,
                         role: values.role,
-                        active: values.active === "yes" ? true : false
+                        active: values.active === "yes" ? true : false,
+                        password
                     }
                     const result = await updateUser(form);
                     if (result.status === 'success') {
@@ -34,7 +38,7 @@ const FormEditUser = (props: EditUser) => {
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: `${result.msg}`
+                            title: `${result.message}`
                         });
                     }
                 }}

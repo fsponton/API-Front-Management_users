@@ -1,12 +1,12 @@
 import axios from "axios"
 
 export default async function deleteUser(props: any) {
-    const { user, token } = props
+    const { email, token, password } = props
     try {
         const response = await axios({
             method: 'post',
             url: 'http://localhost:3005/delete_user',
-            data: user,
+            data: { email, password },
             headers: { Authorization: `Bearer ${token}` }
         })
         return response.data

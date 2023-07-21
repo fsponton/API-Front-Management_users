@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
 
 //middleware findUser
 const findUser = async (req: any, _res: Response, next: NextFunction) => {
+
     const { email } = req.body
 
     const emailChecked = toCheckEmaill(email) // email parsed to string and lowerdcased

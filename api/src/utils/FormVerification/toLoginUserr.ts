@@ -1,10 +1,10 @@
 import { parseToString } from "../users";
 import { LoginUser } from "../../types/types";
 
-const toLoginUserr = (object: any): LoginUser => {
+const toLoginUserr = ({ email, password }: any): LoginUser => {
     const login: LoginUser = {
-        email: parseToString(object.email).toLocaleLowerCase(),
-        password: parseToString(object.password)
+        email: parseToString(email).toLocaleLowerCase(),
+        password: parseToString(password)
     }
     return login
 }

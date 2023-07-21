@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Swal from 'sweetalert2';
 import deleteUser from '../services/deleteUser';
+import ValidatePassword from '../utils/validatePassword';
 
 const FormDeleteUser = (props: any) => {
     const { user, token, closeModal } = props
@@ -21,7 +22,17 @@ const FormDeleteUser = (props: any) => {
                         })
                         return
                     }
-                    const result = await deleteUser(values);
+
+                    const password = await ValidatePassword()
+                    if (!password) { return }
+
+                    const form = {
+                        token,
+                        email: values.user.email,
+                        password
+                    }
+
+                    const result = await deleteUser(form);
                     if (result.status === 'success') {
                         Swal.fire({
                             icon: 'success',
@@ -31,7 +42,7 @@ const FormDeleteUser = (props: any) => {
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: `${result.msg}`
+                            title: `${result.message}`
                         });
                     }
                 }}
