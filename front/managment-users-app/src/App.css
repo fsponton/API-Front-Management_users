@@ -1,3 +1,22 @@
 #root {
   background-color: black;
 }
+
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo del cuadro del checkbox */
+.form-check-input {
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: 20px;
+  color: aqua
+}

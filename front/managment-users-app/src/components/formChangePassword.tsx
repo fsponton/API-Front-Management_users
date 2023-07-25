@@ -5,10 +5,10 @@ import { ResetPW } from '../types/types';
 import resetPassword from '../services/resetPasword';
 import { useNavigate } from "react-router-dom"
 import { getEnviroments } from '../config/enviroments';
+import { tokenFunction } from '../types/types';
 
+const FormChangePassword = ({ token }: tokenFunction) => {
 
-const FormChangePassword = (props: any) => {
-    const { token } = props
     const navigate = useNavigate()
     return (
         <>

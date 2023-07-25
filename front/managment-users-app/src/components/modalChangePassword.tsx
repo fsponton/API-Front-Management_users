@@ -1,8 +1,8 @@
 import Modal from "react-modal"
 import FormChangePassword from "./formChangePassword"
+import { Props } from "../types/types"
 
-const ModalChangePassword = (props: any) => {
-    const { modal, closeModal, token } = props
+const ModalChangePassword = ({ modal, closeModal, token }: Props) => {
 
     return (
         <Modal

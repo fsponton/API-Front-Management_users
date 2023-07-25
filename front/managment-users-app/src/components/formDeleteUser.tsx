@@ -2,9 +2,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Swal from 'sweetalert2';
 import deleteUser from '../services/deleteUser';
 import ValidatePassword from '../utils/validatePassword';
+import { Props } from '../types/types';
+import '../App.css'
 
-const FormDeleteUser = (props: any) => {
-    const { user, token, closeModal } = props
+
+const FormDeleteUser = ({ user, token, closeModal }: Props) => {
 
     return (
         <>
@@ -59,9 +61,9 @@ const FormDeleteUser = (props: any) => {
                             <ErrorMessage name='name' component='div' className='text-danger' />
                         </div>
 
-                        <div className='form-check mb-4'>
+                        <label htmlFor='deleteChecked' className='form-check-label'>Check for delete</label>
+                        <div className='form-check mb-4 d-flex justify-content-center'>
                             <Field type='checkbox' className='form-check-input' id='deleteChecked' name='deleteChecked' />
-                            <label htmlFor='deleteChecked' className='form-check-label'>Delete this user</label>
                         </div>
 
                         <button className='btn btn-outline-light btn-lg px-5' type='submit'>

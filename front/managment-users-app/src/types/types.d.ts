@@ -17,6 +17,28 @@ export interface ResetPW {
     token: string
 }
 
+
+export interface Modal {
+    edit: boolean
+    delete: boolean
+    password: boolean
+}
+
+export interface Props {
+    closeModal: () => void
+    token: string
+    user: EditUser
+    modal: Modal
+}
+
+
+
+export interface tokenFunction {
+    token: string
+    closeModal: () => void
+
+}
+
 export type LoginUser = Pick<User, 'email', 'password'>
 
 export type EmailUser = pick<User, 'email'>

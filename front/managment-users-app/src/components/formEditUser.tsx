@@ -1,12 +1,12 @@
-import { EditUser } from '../types/types'
+import { Props } from '../types/types'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import editUserSchema from '../utils/_yupSchemas/editUserSchema';
 import updateUser from '../services/updateUser';
 import Swal from 'sweetalert2';
 import ValidatePassword from '../utils/validatePassword';
 
-const FormEditUser = (props: EditUser) => {
-    const { user, token, closeModal } = props
+const FormEditUser = ({ user, token, closeModal }: Props) => {
+
     return (
         <>
             <Formik

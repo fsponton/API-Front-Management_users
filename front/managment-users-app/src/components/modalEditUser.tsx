@@ -1,8 +1,8 @@
 import Modal from "react-modal"
 import FormEditUser from "./formEditUser"
+import { Props } from "../types/types"
 
-const ModalEditUser = (props: any) => {
-    const { user, modal, closeModal, token } = props
+const ModalEditUser = ({ user, modal, closeModal, token }: Props) => {
     return (
         <Modal
             style={{
@@ -43,7 +43,7 @@ const ModalEditUser = (props: any) => {
             <div className='row  '>
                 <div className="col col-lg-12 " >
                     <div className="row">
-                        <FormEditUser user={user} token={token} closeModal={closeModal} />
+                        <FormEditUser user={user} token={token} closeModal={closeModal} modal={modal} />
                     </div>
                 </div>
             </div>

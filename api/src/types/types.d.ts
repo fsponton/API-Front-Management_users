@@ -1,27 +1,17 @@
 import { Request } from "express"
 
-export interface DecodedToken extends Request {
-    token: {
-        id: string;
-        name: string;
-        email: string;
-        role: string;
-        active: boolean;
-        iat: number;
-        exp: number;
-    }
+type DecodedToken = {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    active: boolean;
+    iat: number;
+    exp: number;
 }
 
 export interface MyRequest extends Request {
-    token: {
-        id: string;
-        name: string;
-        email: string;
-        role: string;
-        active: boolean;
-        iat: number;
-        exp: number;
-    }
+    token: DecodedToken
 }
 
 

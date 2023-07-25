@@ -3,11 +3,11 @@ import { PrismaClient } from "@prisma/client"
 import { UserError } from "../../utils/Errors/index"
 import { Response, NextFunction } from "express"
 import { toParseCredentials } from "../../utils/FormVerification"
-import { AuthUser } from "../../types/types"
+import { MyRequest } from "../../types/types"
 const prisma = new PrismaClient()
 
 //middleware verify Login User
-const verifyPassword = async (req: AuthUser, _res: Response, next: NextFunction) => {
+const verifyPassword = async (req: MyRequest, _res: Response, next: NextFunction) => {
     const { email } = req.token
     const { password } = req.body
 
