@@ -1,4 +1,4 @@
-export { default as toLoginUserr } from "./toLoginUserr"
-export { default as toCheckEmaill } from "./toCheckEmaill"
-export { default as toNewUserEntryy } from "./toNewUserEntryy"
-export { default as toUpdateUserr } from "./toUpdateUserr"
+export { default as toParseCredentials } from "./toParseCredentials"
+export { default as toCheckEmail } from "./toCheckEmail"
+export { default as toNewUserEntry } from "./toNewUserEntry"
+export { default as toUpdateUser } from "./toUpdateUser"

@@ -1,9 +1,30 @@
 import { Request } from "express"
 
-export interface CustomRequest extends Request {
-    userId: string;
-    password: string;
+export interface DecodedToken extends Request {
+    token: {
+        id: string;
+        name: string;
+        email: string;
+        role: string;
+        active: boolean;
+        iat: number;
+        exp: number;
+    }
 }
+
+export interface MyRequest extends Request {
+    token: {
+        id: string;
+        name: string;
+        email: string;
+        role: string;
+        active: boolean;
+        iat: number;
+        exp: number;
+    }
+}
+
+
 export interface Enviroments {
     PORT: number
     DATABASE_URL: string
@@ -35,7 +56,7 @@ export interface User {
 
 export type NewUser = Pick<User, 'name', 'email', 'password'>
 
-export type LoginUser = Pick<Use, 'email', 'password'>
+export type AuthUser = Pick<Use, 'email', 'password'>
 
 export type UserLogged = Pick<User, 'id', 'name', 'email', 'role'>
 

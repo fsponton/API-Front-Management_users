@@ -8,15 +8,16 @@ const ValidatePassword = async () => {
         try {
             const result = await Swal.fire({
                 title: 'Ingrese su password',
-                input: 'password', // Tipo de input (en este caso, es de tipo texto)
-                inputPlaceholder: 'password', // Placeholder del input
+                input: 'password',
+                inputPlaceholder: 'password',
                 showCancelButton: true,
                 confirmButtonText: 'Aceptar',
                 cancelButtonText: 'Cancelar',
             })
             if (result.isConfirmed) {
                 inputPassword = result.value
-                if (inputPassword.trim() !== '' && inputPassword.length > 8) {
+
+                if (inputPassword.trim() !== '' && inputPassword.length >= 7) {
                     flag = true
                 } else {
                     await Swal.fire({

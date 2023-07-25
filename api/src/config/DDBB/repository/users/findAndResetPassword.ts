@@ -40,5 +40,4 @@ export default async ({ id, passwordHash }: { id: string; passwordHash: string }
         });
         return user;
     }
-    // return false;
 };

@@ -32,7 +32,7 @@ const RegisterUser: React.FC = () => {
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'User registered successfully',
-                                            text: 'el usuario nombreee fue registrado'
+                                            text: `${result.msg}`
                                         });
                                         navigate('/');
                                         return

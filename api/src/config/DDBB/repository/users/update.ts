@@ -4,18 +4,16 @@ import { UpdateUser, User } from "../../../../types/types"
 
 const prisma = new PrismaClient()
 
-export default async (formFromRequest: UpdateUser): Promise<User> => {
-
+export default async ({ name, role, active, email }: UpdateUser): Promise<User> => {
     const userUpdated = await prisma.user.update({
-        where: { email: formFromRequest.email },
+        where: { email },
         data: {
-            name: formFromRequest.name,
-            email: formFromRequest.email,
-            active: formFromRequest.active,
-            role: formFromRequest.role
+            name: name,
+            email: email,
+            active: active,
+            role: role
         }
     })
-
 
     return userUpdated as User;
 }

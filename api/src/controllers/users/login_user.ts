@@ -4,8 +4,6 @@ import jwt from "jsonwebtoken"
 
 const loginUser = async (req: any, res: Response) => {
     const { user } = req
-    console.log(user)
-
 
     const userForToken = {
         id: user.id,
@@ -16,7 +14,6 @@ const loginUser = async (req: any, res: Response) => {
     }
 
     const token = jwt.sign(userForToken, `${getEnviroments().SECRET_WORD}`, { expiresIn: 60 * 60 })
-
 
     return res.status(200)
         .send({ status: "success", email: ` ${userForToken.email} `, token: token, active: user.active })
