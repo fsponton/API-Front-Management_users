@@ -23,20 +23,19 @@ const LoginForm = () => {
                                 validationSchema={loginSchema}
                                 onSubmit={async values => {
                                     const result = await loginUser(values);
-                                    if (!result.active) {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: `Hi ${result.email}, your account is not active`,
-                                        });
-                                        return
-                                    }
-                                    if (result.status === 'success') {
+                                    if (result.status === 'success' && result.active) {
                                         Swal.fire({
                                             icon: 'success',
                                             title: `Hi ${result.email} you are logged`,
                                         });
                                         sessionStorage.setItem(getEnviroments().PW_SESSION, JSON.stringify(result.token));
                                         navigate('/dashboard');
+                                    } else if (result.status === 'success' && !result.active) {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: `Hi ${result.email}, your account is not active`,
+                                        });
+                                        return
                                     } else {
                                         Swal.fire({
                                             icon: 'error',
